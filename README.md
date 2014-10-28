@@ -35,10 +35,6 @@ HDF5 libraries.  If there is an hdf5 modulefile present (the hdf5-roll provides
 this), then the build process will pick these up automatically.  Otherwise,
 you'll need to set the HDF5HOME environment variable to the library location.
 
-cmake.  If there is an cmake modulefile present (the cmake-roll provides
-this), then the build process will pick this up automatically.  Otherwise,
-you'll need to add the appropriate directory to your PATH environment variable.
-
 ## Building
 
 To build the octave-roll, execute these instructions on a Rocks development
