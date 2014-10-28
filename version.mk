@@ -1,7 +1,6 @@
 ROLLNAME        = octave
 VERSION        :=$(shell bash version.sh -v)
-RELEASE        :=$(shell bash version.sh -h).beta
-COPYRIGHT       = Copyright (c) 2014, The Regents of the University of California.
+RELEASE        :=$(shell bash version.sh -h)
 COLOR           = orange
 
 REDHAT.ROOT     = $(PWD)
