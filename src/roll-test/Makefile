@@ -12,7 +12,6 @@ install::
 	         -e 's#MPINAME#$(MPINAME)#g;' \
 	         -e 's#ROLLCOMPILER#$(ROLLCOMPILER)#g;' \
 	         -e 's#ROLLMPI#$(ROLLMPI)#g;' \
-	         -e 's#ROLLPY#$(ROLLPY)#g;' \
 	         -e 's#VERSION#$(VERSION)#g;' \
 	  $(ROOT)/$(PKGROOT)/*.t
 	perl -pi -e 's#ROLLSKIP#$(SKIP)#g' $(ROOT)/$(PKGROOT)/*.t

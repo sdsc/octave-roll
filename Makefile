@@ -63,10 +63,6 @@ ifndef ROLLMPI
   ROLLMPI = rocks-openmpi
 endif
 
-ifndef ROLLPY
-  ROLLPY = python
-endif
-
 -include $(ROLLSROOT)/etc/Rolls.mk
 include Rolls.mk
 
@@ -88,7 +84,7 @@ default:
 	if test -f packages_to_skip; then \
 	  SKIP=`sed 's/#.*//' packages_to_skip | tr '\n' ' '`; \
 	fi; \
-	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLMPI="$(ROLLMPI)" ROLLPY="$(ROLLPY)" SKIP="$${SKIP}" roll
+	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLMPI="$(ROLLMPI)" SKIP="$${SKIP}" roll
 
 clean::
 	rm -f _arch bootstrap.py
