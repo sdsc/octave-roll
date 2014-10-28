@@ -15,7 +15,7 @@ To build/install this roll you must have root access to a Rocks development
 machine (e.g., a frontend or development appliance).
 
 If your Rocks development machine does *not* have Internet access you must
-download the appropriate math source file(s) using a machine that does
+download the appropriate octave source file(s) using a machine that does
 have Internet access and copy them into the `src/<package>` directories on your
 Rocks development machine.
 
@@ -102,10 +102,10 @@ module files for each tool in:
 
 ## Testing
 
-The math-roll includes a test script which can be run to verify proper
+The octave-roll includes a test script which can be run to verify proper
 installation of the roll documentation, binaries and module files. To
 run the test scripts execute the following command(s):
 
 ```shell
-% /root/rolltests/math.t 
+% /root/rolltests/octave.t 
 ```
