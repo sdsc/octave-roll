@@ -70,7 +70,18 @@ COMPILER_FLAGS = -O2 -fopenmp -m64
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
   ifeq ("$(FIRSTCOMPILER)", "gnu")
-    COMPILER_FLAGS += -mavx
+    ifneq ("$(ROLLOPTS)", "$(subst avx2,,$(ROLLOPTS))")
+      COMPILER_FLAGS += -mavx2
+    else
+      COMPILER_FLAGS += -mavx
+    endif
+  endif
+  ifeq ("$(FIRSTCOMPILER)", "intel")
+    ifneq ("$(ROLLOPTS)", "$(subst avx2,,$(ROLLOPTS))")
+      COMPILER_FLAGS += -march=core-avx2
+    else
+      COMPILER_FLAGS += -march=core-avx-i
+    endif
   endif
 endif
 
