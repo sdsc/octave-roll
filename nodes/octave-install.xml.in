@@ -1,0 +1,21 @@
+<?xml version="1.0" standalone="no"?>
+
+<kickstart>
+
+<description>
+octave - http://www.gnu.org/software/octave
+</description>
+
+<copyright>
+Copyright (c) 2000 - 2014 The Regents of the University of California.
+All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
+</copyright>
+
+<package>gnuplot.x86_64</package>
+
+<package>octave</package>
+<package>octave-modules</package>
+
+<package>octave-roll-test</package>
+
+</kickstart>
