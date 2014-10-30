@@ -67,32 +67,11 @@ endif
 include Rolls.mk
 
 default:
-	for i in `ls nodes/*.in`; do \
-	  export o=`echo $$i | sed 's/\.in//'`; \
-	  cp $$i $$o; \
-	  for c in $(ROLLCOMPILER); do \
-	    COMPILERNAME=`echo $$c | awk -F/ '{print $$1}'`; \
-	    perl -pi -e "print and s/COMPILERNAME/$$COMPILERNAME/g if m/COMPILERNAME/" $$o; \
-	  done; \
-	  for m in $(ROLLMPI); do \
-	    MPINAME=`echo $$m | awk -F/ '{print $$1}'`; \
-	    perl -pi -e "print and s/MPINAME/$$MPINAME/g if m/MPINAME/" $$o; \
-	  done; \
-	  perl -pi -e '$$_ = "" if m/COMPILERNAME|MPINAME/' $$o; \
-	done
-	SKIP=''; \
-	if test -f packages_to_skip; then \
-	  SKIP=`sed 's/#.*//' packages_to_skip | tr '\n' ' '`; \
-	fi; \
-	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLMPI="$(ROLLMPI)" SKIP="$${SKIP}" roll
+	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLMPI="$(ROLLMPI)" ROLLOPTS=$(ROLLOPTS) roll
 
 clean::
 	rm -f _arch bootstrap.py
 
 distclean: clean
-	for i in `ls nodes/*.in`; do \
-	  export o=`echo $$i | sed 's/\.in//'`; \
-	  rm -f $$o; \
-	done
-	rm -fr RPMS SRPMS src/build-*
+	rm -fr RPMS SRPMS
 	-rm -f build.log

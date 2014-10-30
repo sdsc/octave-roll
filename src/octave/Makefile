@@ -69,14 +69,13 @@ F77 = gfortran
 COMPILER_FLAGS = -O2 -fopenmp -m64
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
-  ifeq ("$(FIRSTCOMPILER)", "gnu")
+  ifeq ("$(COMPILERNAME)", "gnu")
     ifneq ("$(ROLLOPTS)", "$(subst avx2,,$(ROLLOPTS))")
       COMPILER_FLAGS += -mavx2
     else
       COMPILER_FLAGS += -mavx
     endif
-  endif
-  ifeq ("$(FIRSTCOMPILER)", "intel")
+  else ifeq ("$(COMPILERNAME)", "intel")
     ifneq ("$(ROLLOPTS)", "$(subst avx2,,$(ROLLOPTS))")
       COMPILER_FLAGS += -march=core-avx2
     else
@@ -163,4 +162,3 @@ install::
 
 clean::
 	rm -rf $(SOURCE_DIR)
-

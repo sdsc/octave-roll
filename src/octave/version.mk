@@ -1,16 +1,14 @@
 ifndef ROLLCOMPILER
   ROLLCOMPILER = gnu
 endif
-FIRSTCOMPILER := $(firstword $(ROLLCOMPILER))
-COMPILERNAME := $(firstword $(subst /, ,$(FIRSTCOMPILER)))
+COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
 
-# ROLLMPI only used for locating fftw/hdf5 modulefiles
 ifndef ROLLMPI
-  ROLLMPI = rocks-openmpi
+  ROLLMPI = openmpi
 endif
-FIRSTMPI := $(firstword $(ROLLMPI))
+MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
 
-NAME           = octave_$(COMPILERNAME)
+NAME           = octave
 VERSION        = 3.8.2
 RELEASE        = 1
 PKGROOT        = /opt/octave
