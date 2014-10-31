@@ -64,9 +64,24 @@ include Rules.mk
 include pull.mk
 
 CC = gcc
+ifeq ("$(COMPILERNAME)", "intel")
+  CC = icc
+else ifeq ("$(COMPILERNAME)", "pgi")
+  CC = pgcc
+endif
 CXX = g++
+ifeq ("$(COMPILERNAME)", "intel")
+  CXX = icc
+else ifeq ("$(COMPILERNAME)", "pgi")
+  CXX = pgcc
+endif
 F77 = gfortran
-COMPILER_FLAGS = -O2 -fopenmp -m64
+ifeq ("$(COMPILERNAME)", "intel")
+  F77 = ifort
+else ifeq ("$(COMPILERNAME)", "pgi")
+  F77 = pgfortran
+endif
+COMPILER_FLAGS = -O2 -fopenmp -m64 -fdefault-integer-8
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
   ifeq ("$(COMPILERNAME)", "gnu")
@@ -77,15 +92,15 @@ ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
     endif
   else ifeq ("$(COMPILERNAME)", "intel")
     ifneq ("$(ROLLOPTS)", "$(subst avx2,,$(ROLLOPTS))")
-      COMPILER_FLAGS += -march=core-avx2
+      COMPILER_FLAGS += -mtune=core-avx2
     else
-      COMPILER_FLAGS += -march=core-avx-i
+      COMPILER_FLAGS += -mtune=core-avx-i
     endif
   endif
 endif
 
 COMPILERSETUP =  \
-  module load $(FIRSTCOMPILER) || true; \
+  module load $(ROLLCOMPILER) || true; \
   echo === Compiler and version ===; \
   $(CC) --version
 
@@ -106,7 +121,7 @@ MKLSETUP = \
   export MKLLIB=`find $${MKL_ROOT}/lib/* -maxdepth 0 | head -1`
 
 MPISETUP = \
-  module load $(FIRSTMPI) || true; \
+  module load $(ROLLMPI) || true; \
   echo === MPIHOME ===; \
   echo $${MPIHOME}
 
