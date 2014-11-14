@@ -37,11 +37,11 @@ you'll need to set the HDF5HOME environment variable to the library location.
 
 ## Building
 
-To build the octave-roll, execute these instructions on a Rocks development
+To build the octave-roll, execute this on a Rocks development
 machine (e.g., a frontend or development appliance):
 
 ```shell
-% make default 2>&1 | tee build.log
+% make 2>&1 | tee build.log
 ```
 
 A successful build will create the file `octave-*.disk1.iso`.  If you built the
@@ -78,8 +78,8 @@ To install, execute these instructions on a Rocks frontend:
 % rocks run roll octave | bash
 ```
 
-In addition to the software itself, the roll installs individual environment
-module files for each tool in:
+In addition to the software itself, the roll installs octave environment
+module files in:
 
 ```shell
 /opt/modulefiles/applications
