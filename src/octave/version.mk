@@ -4,13 +4,13 @@ endif
 COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
 
 ifndef ROLLMPI
-  ROLLMPI = openmpi
+  ROLLMPI = rocks-openmpi
 endif
 MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
 
-NAME           = octave
+NAME           = sdsc-octave
 VERSION        = 3.8.2
-RELEASE        = 1
+RELEASE        = 2
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave

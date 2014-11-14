@@ -13,9 +13,8 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 
 <package>gnuplot.x86_64</package>
 
-<package>octave</package>
-<package>octave-modules</package>
-
-<package>octave-roll-test</package>
+<package>sdsc-octave</package>
+<package>sdsc-octave-modules</package>
+<package>sdsc-octave-roll-test</package>
 
 </kickstart>
