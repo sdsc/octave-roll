@@ -81,7 +81,7 @@ ifeq ("$(COMPILERNAME)", "intel")
 else ifeq ("$(COMPILERNAME)", "pgi")
   F77 = pgfortran
 endif
-COMPILER_FLAGS = -O2 -fopenmp -m64 -fdefault-integer-8
+COMPILER_FLAGS = -O2 -fopenmp -m64
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
   ifeq ("$(COMPILERNAME)", "gnu")
