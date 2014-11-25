@@ -65,6 +65,11 @@ include $(SDSCDEVEL)/Pull.mk
 include $(SDSCDEVEL)/Rules.mk
 
 COMPILER_FLAGS = -O2 -fopenmp -m64
+LIBLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
+          -lmkl_gnu_thread -lmkl_core -ldl -lpthread -lm
+ifeq ("$(COMPILERNAME)", "intel")
+  LIBLINK = -mkl
+endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
   ifeq ("$(COMPILERNAME)", "gnu")
@@ -105,6 +110,7 @@ LICENSE: $(SRC_DIRS)
 	echo GPLv3+ > $@
 
 build: $(SRC_DIRS)
+	patch $(SOURCE_DIR)/liboctave/cruft/misc/quit.h patch-files/quit.h.patch
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MKL); \
@@ -113,15 +119,9 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
 	  export LIBINCLUDE="-I$${MKL_ROOT}/include"; \
-	  export LIBLINK="-Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
-	                  -lmkl_gnu_thread -lmkl_core -ldl -lpthread -lm"; \
-	  if test "$(COMPILERNAME)" = "gnu"; then \
-	    gccdir=`which gcc | sed 's/\/gcc$$//'`; \
-	    if test "$${gccdir}" != "/usr/bin"; then \
-	      for F in `find $${gccdir}/.. -name include`; do \
-	        export LIBINCLUDE="$${LIBINCLUDE} -I$${F}"; \
-	      done; \
-	    fi; \
+	  export LIBLINK="$(LIBLINK)"; \
+	  if test "$(COMPILERNAME)" = "intel"; then \
+	    export F77_INTEGER_8_FLAG=-i8; \
 	  fi; \
 	  export CC=$(CC); \
 	  export CFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
@@ -146,6 +146,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	$(PKGROOT_BIND_MOUNT)
 	( \
+	  $(MODULE_LOAD_CC); \
 	  cd $(SOURCE_DIR)/build; \
 	  $(MAKE) install; \
 	)

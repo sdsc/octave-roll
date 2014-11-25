@@ -1,0 +1,3 @@
+quit.h.patch
+  downstream patch that allows compilation w/intel. See
+  http://hg.savannah.gnu.org/hgweb/octave/rev/96df707c7dad
