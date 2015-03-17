@@ -8,7 +8,7 @@ DESC=`eval ${DESC_CMD}`
 if [ ! -d "./.git" ] && [ -z "${DESC}" ]
 then
     # Try to support using the tagged downloads
-    DESC=`pwd | grep -oe 'slurm-roll-.\+' | sed 's/slurm-roll-//g'`
+    DESC=`pwd | grep -oe 'octave-roll-.\+' | sed 's/octave-roll-//g'`
     LOCAL_REV="-github_archive"
 fi
 
