@@ -12,6 +12,8 @@ All rights reserved. Rocks(r) v5.1 www.rocksclusters.org
 </copyright>
 
 <package>gnuplot.x86_64</package>
+<package>mesa-libGL</package>
+<package>mesa-libGLU</package>
 
 <package>sdsc-octave</package>
 <package>sdsc-octave-modules</package>
