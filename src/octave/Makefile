@@ -129,7 +129,7 @@ build: $(SRC_DIRS)
 	  mkdir build; \
 	  cd build; \
 	  ../configure --prefix=$(PKGROOT) \
-	    --enable-64 --disable-docs \
+	    --enable-64 \
 	    --with-blas="$${LIBLINK}" --with-lapack="$${LIBLINK}" \
 	    --with-fftw3=$${FFTWHOME} \
 	    --with-hdf5=$${HDF5HOME} \

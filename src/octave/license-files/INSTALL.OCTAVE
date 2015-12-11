@@ -239,7 +239,7 @@ OpenGL
 Qhull
      Computational geometry library (<http://www.qhull.org>).  Qhull is
      required to provide the functions 'convhull', 'convhulln',
-     'delaunay', 'delaunay3', 'delaunayn', 'voronoi', and 'voronoin'.
+     'delaunay', 'delaunayn', 'voronoi', and 'voronoin'.
 
 QRUPDATE
      QR factorization updating library
@@ -635,11 +635,20 @@ them, although there may be some differences.
 
      Other systems may require a different solution.
 
+   * ARPACK (http://forge.scilab.org/index.php/p/arpack-ng/)
+
+        - Add '-fdefault-integer-8' to 'FFLAGS' when running configure.
+
+        - Run 'make' to build the library.
+
+        - Run 'make install' to install the library.
+
    * ATLAS instead of reference BLAS and LAPACK
 
      Suggestions on how to compile ATLAS would be most welcome.
 
    * GLPK
+
    * Qhull (<http://www.qhull.org>)
 
      Both GLPK and Qhull use 'int' internally so maximum problem sizes
@@ -730,8 +739,8 @@ installation of Octave.
           options      MATH_EMULATE
 
      in the kernel configuration files (typically found in the directory
-     '/sys/i386/conf'.  After making this change, you'll need to rebuild
-     the kernel, install it, and reboot.
+     '/sys/i386/conf').  After making this change, you'll need to
+     rebuild the kernel, install it, and reboot.
 
    * If you encounter errors like
 
