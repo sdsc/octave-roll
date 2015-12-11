@@ -106,7 +106,6 @@ LICENSE: $(SRC_DIRS)
 	echo GPLv3+ > $@
 
 build: $(SRC_DIRS)
-	patch $(SOURCE_DIR)/liboctave/cruft/misc/quit.h patch-files/quit.h.patch
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MKL); \
