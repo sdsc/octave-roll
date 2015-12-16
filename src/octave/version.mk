@@ -4,8 +4,8 @@ endif
 COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
 
 NAME           = sdsc-octave
-VERSION        = 3.8.2
-RELEASE        = 2
+VERSION        = 4.0.0
+RELEASE        = 0
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave
