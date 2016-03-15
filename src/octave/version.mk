@@ -3,9 +3,15 @@ ifndef ROLLCOMPILER
 endif
 COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
 
+# mpi needed indirectly in octave configuration for hdf5 use
+ifndef ROLLMPI
+  ROLLMPI = rocks-openmpi
+endif
+MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
+
 NAME           = sdsc-octave
 VERSION        = 4.0.0
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave

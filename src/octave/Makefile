@@ -113,7 +113,7 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_MPI); \
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
-	  export LIBINCLUDE="-I$${MKL_ROOT}/include"; \
+	  export LIBINCLUDE="-I$${MKL_ROOT}/include -I$${MPIHOME}/include"; \
 	  export LIBLINK="$(LIBLINK)"; \
 	  if test "$(COMPILERNAME)" = "intel"; then \
 	    export F77_INTEGER_8_FLAG=-i8; \
@@ -124,14 +124,16 @@ build: $(SRC_DIRS)
 	  export CXXFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
 	  export F77=$(F77); \
 	  export FFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
+	  export LDFLAGS="-L$${MPIHOME}/lib -lmpi -lmpi_cxx"; \
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
 	  ../configure --prefix=$(PKGROOT) \
 	    --enable-64 \
 	    --with-blas="$${LIBLINK}" --with-lapack="$${LIBLINK}" \
-	    --with-fftw3=$${FFTWHOME} \
-	    --with-hdf5=$${HDF5HOME} \
+	    --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
+	    --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
+	    --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
 	)
 	@echo "::: Package $(NAME) build complete :::"
 	
