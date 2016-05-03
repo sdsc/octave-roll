@@ -91,12 +91,10 @@ $(NAME).spec: DESCRIPTION LICENSE
 
 DESCRIPTION:
 	$(MODULE_LOAD_CC); \
-	$(MODULE_LOAD_MPI); \
 	( \
 	  $(DESCRIBE_PKG); \
 	  $(DESCRIBE_CC); \
 	  $(DESCRIBE_MKL); \
-	  $(DESCRIBE_MPI); \
 	  $(DESCRIBE_FFTW); \
 	  $(DESCRIBE_HDF5) \
 	) > $@
@@ -110,7 +108,6 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MKL); \
 	  export MKLLIB=`find $${MKLHOME}/lib/* -maxdepth 0 | head -1`; \
-	  $(MODULE_LOAD_MPI); \
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
 	  export LIBINCLUDE="-I$${MKL_ROOT}/include -I$${MPIHOME}/include"; \
@@ -124,7 +121,6 @@ build: $(SRC_DIRS)
 	  export CXXFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
 	  export F77=$(F77); \
 	  export FFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
-	  export LDFLAGS="-L$${MPIHOME}/lib -lmpi -lmpi_cxx"; \
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
