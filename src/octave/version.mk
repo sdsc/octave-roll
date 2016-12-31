@@ -5,7 +5,7 @@ COMPILERNAME := $(firstword $(subst /, ,$(ROLLCOMPILER)))
 
 NAME           = sdsc-octave
 VERSION        = 4.0.0
-RELEASE        = 2
+RELEASE        = 3
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave
