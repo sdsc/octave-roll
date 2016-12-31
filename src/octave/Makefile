@@ -96,9 +96,12 @@ DESCRIPTION:
 	  $(DESCRIBE_PKG); \
 	  $(DESCRIBE_CC); \
 	  $(DESCRIBE_FFTW); \
-	  $(DESCRIBE_HDF5); \
-	  $(DESCRIBE_MKL) \
+	  $(DESCRIBE_HDF5) \
 	) > $@
+	$(MODULE_LOAD_MKL); \
+	if test -n "$${MKL_ROOT}"; then \
+	  $(DESCRIBE_MKL) >> $@; \
+	fi
 
 LICENSE: $(SRC_DIRS)
 	$(CHECK_LICENSE_FILES)
