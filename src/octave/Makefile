@@ -64,11 +64,12 @@ include Rules.mk
 include $(SDSCDEVEL)/Pull.mk
 include $(SDSCDEVEL)/Rules.mk
 
-COMPILER_FLAGS = -O2 -fopenmp -m64
-LIBLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
+COMPILER_FLAGS = -O2 -fopenmp
+
+MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
           -lmkl_gnu_thread -lmkl_core -ldl -lpthread -lm
 ifeq ("$(COMPILERNAME)", "intel")
-  LIBLINK = -mkl
+  MKLLINK = -mkl
 endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
@@ -94,10 +95,13 @@ DESCRIPTION:
 	( \
 	  $(DESCRIBE_PKG); \
 	  $(DESCRIBE_CC); \
-	  $(DESCRIBE_MKL); \
 	  $(DESCRIBE_FFTW); \
 	  $(DESCRIBE_HDF5) \
 	) > $@
+	$(MODULE_LOAD_MKL); \
+	if test -n "$${MKL_ROOT}"; then \
+	  $(DESCRIBE_MKL) >> $@; \
+	fi
 
 LICENSE: $(SRC_DIRS)
 	$(CHECK_LICENSE_FILES)
@@ -106,30 +110,37 @@ LICENSE: $(SRC_DIRS)
 build: $(SRC_DIRS)
 	( \
 	  $(MODULE_LOAD_CC); \
-	  $(MODULE_LOAD_MKL); \
-	  export MKLLIB=`find $${MKLHOME}/lib/* -maxdepth 0 | head -1`; \
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
-	  export LIBINCLUDE="-I$${MKL_ROOT}/include -I$${MPIHOME}/include"; \
-	  export LIBLINK="$(LIBLINK)"; \
+	  $(MODULE_LOAD_MKL); \
 	  if test "$(COMPILERNAME)" = "intel"; then \
 	    export F77_INTEGER_8_FLAG=-i8; \
 	  fi; \
 	  export CC=$(CC); \
-	  export CFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
+	  export CFLAGS="$(COMPILER_FLAGS)"; \
 	  export CXX=$(CXX); \
-	  export CXXFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
+	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
 	  export F77=$(F77); \
-	  export FFLAGS="$(COMPILER_FLAGS) $${LIBINCLUDE}"; \
+	  export FFLAGS="$(COMPILER_FLAGS)"; \
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
-	  ../configure --prefix=$(PKGROOT) \
-	    --enable-64 \
-	    --with-blas="$${LIBLINK}" --with-lapack="$${LIBLINK}" \
-	    --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
-	    --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
-	    --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
+	  if test -n "$${MKL_ROOT}"; then \
+	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
+	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
+	    export FFLAGS="$${FFLAGS} -I$${MKL_ROOT}/include -m64"; \
+	    export MKLLIB=`find $${MKL_ROOT}/lib/* -maxdepth 0 | head -1`; \
+	    ../configure --prefix=$(PKGROOT) \
+	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
+	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
+	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
+	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64; \
+	  else \
+	    ../configure --prefix=$(PKGROOT) \
+	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
+	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
+	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib; \
+	  fi \
 	)
 	@echo "::: Package $(NAME) build complete :::"
 	

@@ -29,10 +29,15 @@ The roll sources assume that modulefiles provided by SDSC compiler and mpi
 rolls are available, but it will build without them as long as the environment
 variables they provide are otherwise defined.
 
-The build process requires the MKL, FFTW, and HDF5 libraries and assumes that
-the boost modulefiles provided by the corresponding SDSC rolls are available.
+The build process requires the FFTW and HDF5 libraries and assumes that
+the modulefiles provided by the corresponding SDSC rolls are available.
 It will build without the modulefiles as long as the environment variables
 they provide are otherwise defined.
+
+If the MKL modulefile provided by the SDSC intel roll is present, or if the
+MKL_ROOT environment variable is otherwise defined, the build process will use
+the MKL BLAS and LAPACK libraries; otherwise, it will make use of whatever
+system libraries are available.
 
 
 ## Building
