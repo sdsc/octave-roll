@@ -58,12 +58,15 @@
 ifndef ROLLCOMPILER
   ROLLCOMPILER = gnu
 endif
+ifndef ROLLMPI
+  ROLLMPI = rocks-openmpi
+endif
 
 -include $(ROLLSROOT)/etc/Rolls.mk
 include Rolls.mk
 
 default:
-	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLOPTS=$(ROLLOPTS) roll
+	$(MAKE) ROLLCOMPILER="$(ROLLCOMPILER)" ROLLMPI="$(ROLLMPI)" ROLLOPTS=$(ROLLOPTS) roll
 
 clean::
 	rm -f _arch bootstrap.py

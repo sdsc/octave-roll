@@ -95,6 +95,7 @@ DESCRIPTION:
 	( \
 	  $(DESCRIBE_PKG); \
 	  $(DESCRIBE_CC); \
+	  $(DESCRIBE_MPI); \
 	  $(DESCRIBE_FFTW); \
 	  $(DESCRIBE_HDF5) \
 	) > $@
@@ -110,6 +111,7 @@ LICENSE: $(SRC_DIRS)
 build: $(SRC_DIRS)
 	( \
 	  $(MODULE_LOAD_CC); \
+          $(MODULE_LOAD_MPI); \
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
 	  $(MODULE_LOAD_MKL); \
