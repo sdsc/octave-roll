@@ -127,6 +127,7 @@ build: $(SRC_DIRS)
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
+          export CPPFLAGS=-I$${MPIHOME}/include; \
 	  if test -n "$${MKL_ROOT}"; then \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
@@ -136,12 +137,14 @@ build: $(SRC_DIRS)
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
-	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64; \
+	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64 \
+              --enable-fortran-calling-convention=f2c; \
 	  else \
 	    ../configure --prefix=$(PKGROOT) \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
-	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib; \
+	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
+              --enable-fortran-calling-convention=f2c; \
 	  fi \
 	)
 	@echo "::: Package $(NAME) build complete :::"
@@ -153,8 +156,20 @@ install::
 	$(PKGROOT_BIND_MOUNT)
 	( \
 	  $(MODULE_LOAD_CC); \
+	  export CC=$(CC); \
+	  export CFLAGS="$(COMPILER_FLAGS)"; \
+	  export CXX=$(CXX); \
+	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
+	  export F77=$(F77); \
+	  export FFLAGS="$(COMPILER_FLAGS)"; \
 	  cd $(SOURCE_DIR)/build; \
 	  $(MAKE) install; \
+          export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
+          export CXXFLAGS=-std=c++11; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(STRUCT_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(PARALLEL_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(CONTROL_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(SIGNAL_PKG)" \
 	)
 	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
