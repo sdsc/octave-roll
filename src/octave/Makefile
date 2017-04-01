@@ -166,10 +166,10 @@ install::
 	  $(MAKE) install; \
           export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
           export CXXFLAGS=-std=c++11; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(STRUCT_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(PARALLEL_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(CONTROL_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install $(SIGNAL_PKG)" \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(STRUCT_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(PARALLEL_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
+          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
 	)
 	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
