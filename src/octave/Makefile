@@ -166,6 +166,7 @@ install::
 	  $(MAKE) install; \
           export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
           export CXXFLAGS=-std=c++11; \
+          cd ../..; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(STRUCT_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(PARALLEL_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
