@@ -65,10 +65,12 @@ include $(SDSCDEVEL)/Pull.mk
 include $(SDSCDEVEL)/Rules.mk
 
 COMPILER_FLAGS = -O2 -fopenmp
+EXTRA_CONFIGURE_OPTION =
 
 MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
           -lmkl_gnu_thread -lmkl_core -ldl -lpthread -lm
 ifeq ("$(COMPILERNAME)", "intel")
+  EXTRA_CONFIGURE_OPTION = --enable-fortran-calling-convention=f2c
   MKLLINK = -mkl
 endif
 
@@ -138,13 +140,13 @@ build: $(SRC_DIRS)
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
 	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64 \
-              --enable-fortran-calling-convention=f2c; \
+              $(EXTRA_CONFIGURE_OPTION); \
 	  else \
 	    ../configure --prefix=$(PKGROOT) \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
-              --enable-fortran-calling-convention=f2c; \
+              $(EXTRA_CONFIGURE_OPTION); \
 	  fi \
 	)
 	@echo "::: Package $(NAME) build complete :::"
