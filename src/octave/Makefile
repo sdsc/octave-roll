@@ -158,6 +158,7 @@ install::
 	$(PKGROOT_BIND_MOUNT)
 	( \
 	  $(MODULE_LOAD_CC); \
+	  $(MODULE_LOAD_MPI); \
 	  export CC=$(CC); \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
 	  export CXX=$(CXX); \
