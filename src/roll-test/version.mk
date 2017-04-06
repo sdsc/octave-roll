@@ -1,6 +1,6 @@
 NAME       = sdsc-octave-roll-test
 VERSION    = 1
-RELEASE    = 2
+RELEASE    = 3
 PKGROOT    = /root/rolltests
 
 RPM.EXTRAS = AutoReq:No
