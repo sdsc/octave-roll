@@ -130,11 +130,19 @@ build: $(SRC_DIRS)
           export CPPFLAGS=-I$${MPIHOME}/include; \
           export CPPFLAGS="-I$${MPIHOME}/include -I/share/apps/compute/pcre/include"; \
           export LDFLAGS="-L/share/apps/compute/pcre/lib"; \
+<<<<<<< HEAD
           if test "$COMPILERNAME" = "intel"; then \
                export F77_INTEGER_8_FLAG=-i8; \
           elif test "$COMPILERNAME" = "gnu"; then \
                export F77_INTEGER_8_FLAG=-fdefault-integer-8; \
           endif; \
+=======
+          if test "$COMPILERNAME" = "intel"; then
+               export F77_INTEGER_8_FLAG=-i8; \
+          elif test "$COMPILERNAME" = "gnu"; then
+               export F77_INTEGER_8_FLAG=-fdefault-integer-8
+          endif
+>>>>>>> 50763c266df709aaa7e24279547f291a2cc69510
 	  if test -n "$${MKL_ROOT}"; then \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
