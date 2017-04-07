@@ -72,9 +72,7 @@ MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
 ifeq ("$(COMPILERNAME)", "intel")
   EXTRA_CONFIGURE_OPTION = --enable-fortran-calling-convention=f2c
   MKLLINK = -mkl
-  export F77_INTEGER_8_FLAG=-i8; \
 else ifeq ("$(COMPILERNAME)", "gnu")
-  export F77_INTEGER_8_FLAG=-fdefault-integer-8
 endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
@@ -132,6 +130,11 @@ build: $(SRC_DIRS)
           export CPPFLAGS=-I$${MPIHOME}/include; \
           export CPPFLAGS="-I$${MPIHOME}/include -I/share/apps/compute/pcre/include"; \
           export LDFLAGS="-L/share/apps/compute/pcre/lib"; \
+          if test "$COMPILERNAME" = "intel"; then
+               export F77_INTEGER_8_FLAG=-i8; \
+          elif test "$COMPILERNAME" = "gnu"; then
+               export F77_INTEGER_8_FLAG=-fdefault-integer-8
+          endif
 	  if test -n "$${MKL_ROOT}"; then \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
