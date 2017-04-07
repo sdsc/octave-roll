@@ -72,8 +72,9 @@ MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
 ifeq ("$(COMPILERNAME)", "intel")
   EXTRA_CONFIGURE_OPTION = --enable-fortran-calling-convention=f2c
   MKLLINK = -mkl
+  export F77_INTEGER_8_FLAG=-i8; \
 else ifeq ("$(COMPILERNAME)", "gnu")
-  COMPILER_FLAGS += -fdefault-integer-8
+  export F77_INTEGER_8_FLAG=-fdefault-integer-8
 endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
@@ -119,9 +120,6 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_FFTW); \
 	  $(MODULE_LOAD_HDF5); \
 	  $(MODULE_LOAD_MKL); \
-	  if test "$(COMPILERNAME)" = "intel"; then \
-	    export F77_INTEGER_8_FLAG=-i8; \
-	  fi; \
 	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
 	  export CXX=$(CXX); \
