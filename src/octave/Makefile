@@ -72,6 +72,8 @@ MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
 ifeq ("$(COMPILERNAME)", "intel")
   EXTRA_CONFIGURE_OPTION = --enable-fortran-calling-convention=f2c
   MKLLINK = -mkl
+else ifeq ("$(COMPILERNAME)", "gnu")
+  COMPILER_FLAGS += -fdefault-integer-8
 endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
@@ -148,7 +150,7 @@ build: $(SRC_DIRS)
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
-              $(EXTRA_CONFIGURE_OPTION); \
+              --enable-64 $(EXTRA_CONFIGURE_OPTION); \
 	  fi \
 	)
 	@echo "::: Package $(NAME) build complete :::"
