@@ -134,7 +134,7 @@ build: $(SRC_DIRS)
                export F77_INTEGER_8_FLAG=-i8; \
           elif test "$(COMPILERNAME)" = "gnu"; then \
                export F77_INTEGER_8_FLAG=-fdefault-integer-8; \
-          endif; \
+          fi; \
 	  if test -n "$${MKL_ROOT}"; then \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
@@ -166,12 +166,12 @@ install::
 	  $(MODULE_LOAD_MPI); \
 	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
-	  export CXX=$(CXX); \
-	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
-	  export F77=mpif90); \
-	  export FFLAGS="$(COMPILER_FLAGS)"; \
-	  cd $(SOURCE_DIR)/build; \
-	  $(MAKE) install; \
+          export CXX=$(CXX); \
+          export CXXFLAGS="$(COMPILER_FLAGS)"; \
+          export F77=mpif90; \
+          export FFLAGS="$(COMPILER_FLAGS)"; \
+          cd $(SOURCE_DIR)/build; \
+          $(MAKE) install; \
           export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
           export CXXFLAGS=-std=c++11; \
           cd ../..; \
@@ -179,7 +179,7 @@ install::
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(PARALLEL_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
-	)
+        )
 	#$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
 	@echo "::: Package $(NAME) install complete :::"
