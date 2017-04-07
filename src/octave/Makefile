@@ -120,16 +120,18 @@ build: $(SRC_DIRS)
 	  if test "$(COMPILERNAME)" = "intel"; then \
 	    export F77_INTEGER_8_FLAG=-i8; \
 	  fi; \
-	  export CC=$(CC); \
+	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
 	  export CXX=$(CXX); \
 	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
-	  export F77=$(F77); \
+	  export F77=mpif90; \
 	  export FFLAGS="$(COMPILER_FLAGS)"; \
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
           export CPPFLAGS=-I$${MPIHOME}/include; \
+          export CPPFLAGS="-I$${MPIHOME}/include -I/share/apps/compute/pcre/include"; \
+          export LDFLAGS="-L/share/apps/compute/pcre/lib"; \
 	  if test -n "$${MKL_ROOT}"; then \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
@@ -155,15 +157,15 @@ install::
 	# Using a bind mount appears to be the only way to prevent the build
 	# from incorporating $(ROOT) in binary files.
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	$(PKGROOT_BIND_MOUNT)
+	#$(PKGROOT_BIND_MOUNT)
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MPI); \
-	  export CC=$(CC); \
+	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
 	  export CXX=$(CXX); \
 	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
-	  export F77=$(F77); \
+	  export F77=mpif90); \
 	  export FFLAGS="$(COMPILER_FLAGS)"; \
 	  cd $(SOURCE_DIR)/build; \
 	  $(MAKE) install; \
@@ -175,7 +177,7 @@ install::
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
 	)
-	$(PKGROOT_BIND_UMOUNT)
+	#$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
 	@echo "::: Package $(NAME) install complete :::"
 
