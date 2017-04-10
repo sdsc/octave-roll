@@ -120,7 +120,7 @@ build: $(SRC_DIRS)
 	  $(MODULE_LOAD_MKL); \
 	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
-	  export CXX=$(CXX); \
+	  export CXX=mpicxx; \
 	  export CXXFLAGS="$(COMPILER_FLAGS)"; \
 	  export F77=mpif90; \
 	  export FFLAGS="$(COMPILER_FLAGS)"; \
@@ -166,7 +166,7 @@ install::
 	  $(MODULE_LOAD_MPI); \
 	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
-          export CXX=$(CXX); \
+          export CXX=mpicxx; \
           export CXXFLAGS="$(COMPILER_FLAGS)"; \
           export F77=mpif90; \
           export FFLAGS="$(COMPILER_FLAGS)"; \
