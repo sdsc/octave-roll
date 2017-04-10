@@ -160,7 +160,7 @@ install::
 	# Using a bind mount appears to be the only way to prevent the build
 	# from incorporating $(ROOT) in binary files.
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
-	#$(PKGROOT_BIND_MOUNT)
+	$(PKGROOT_BIND_MOUNT)
 	( \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MPI); \
@@ -180,7 +180,7 @@ install::
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
           $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
         )
-	#$(PKGROOT_BIND_UMOUNT)
+	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
 	@echo "::: Package $(NAME) install complete :::"
 
