@@ -6,4 +6,4 @@ setenv OCTAVEHOME /opt/octave
 prepend-path PATH /opt/octave/bin
 prepend-path LD_LIBRARY_PATH /opt/octave/lib/octave/VERSION
 prepend-path LIBPATH /opt/octave/lib/octave/VERSION
-module load ROLLCOMPILER
+module load ROLLCOMPILER ROLLMPI ROLLMKL

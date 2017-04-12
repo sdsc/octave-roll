@@ -1,6 +1,6 @@
 GNU Octave -- a high-level language for numerical computations.
 
-Copyright (C) 1996-2015 John W. Eaton
+Copyright (C) 1996-2017 John W. Eaton
 
 Overview
 --------
@@ -35,7 +35,7 @@ Installation
 Octave requires approximately 1.4 GB of disk storage to unpack and
 compile from source (significantly less, 400 MB, if you don't compile
 with debugging symbols).  Once installed, Octave requires
-approximately 350MB of disk space (again, considerably less, 70 MB,
+approximately 350 MB of disk space (again, considerably less, 70 MB,
 if you don't build shared libraries or the binaries and libraries do
 not include debugging symbols).
 
