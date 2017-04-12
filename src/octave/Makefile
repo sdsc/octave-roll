@@ -127,15 +127,14 @@ build: $(SRC_DIRS)
 	  cd $(SOURCE_DIR); \
 	  mkdir build; \
 	  cd build; \
-          export CPPFLAGS=-I$${MPIHOME}/include; \
           export CPPFLAGS="-I$${MPIHOME}/include -I/share/apps/compute/pcre/include"; \
           export LDFLAGS="-L/share/apps/compute/pcre/lib"; \
-          if test "$(COMPILERNAME)" = "intel"; then \
-               export F77_INTEGER_8_FLAG=-i8; \
-          elif test "$(COMPILERNAME)" = "gnu"; then \
-               export F77_INTEGER_8_FLAG=-fdefault-integer-8; \
-          fi; \
 	  if test -n "$${MKL_ROOT}"; then \
+	    if test "$(COMPILERNAME)" = "intel"; then \
+	      export F77_INTEGER_8_FLAG=-i8; \
+	    elif test "$(COMPILERNAME)" = "gnu"; then \
+	      export F77_INTEGER_8_FLAG=-fdefault-integer-8; \
+	    fi; \
 	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
 	    export FFLAGS="$${FFLAGS} -I$${MKL_ROOT}/include -m64"; \
@@ -151,7 +150,7 @@ build: $(SRC_DIRS)
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
-              --enable-64 $(EXTRA_CONFIGURE_OPTION); \
+              $(EXTRA_CONFIGURE_OPTION); \
 	  fi \
 	)
 	@echo "::: Package $(NAME) build complete :::"

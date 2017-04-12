@@ -10,6 +10,12 @@ $(VERSION_INC): $(VERSION_SRC)
 build:
 
 install:: typical-modulefile-install
+	  $(MODULE_LOAD_MKL); \
+	  rollmkl=; \
+	  if test -n "$${MKL_ROOT}"; then \
+	    rollmkl=mkl; \
+	  fi; \
+	  perl -pi -e "s/ROLLMKL/$$rollmkl/" $(ROOT)/$(PKGROOT)/$(VERSION)
 
 clean::
 	rm -f $(VERSION_INC)
