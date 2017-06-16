@@ -10,7 +10,7 @@ MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
 
 NAME           = sdsc-octave
 VERSION        = 4.2.1
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave
