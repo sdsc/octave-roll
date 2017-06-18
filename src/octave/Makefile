@@ -72,7 +72,14 @@ MKLLINK = -Wl,-rpath,$${MKLLIB} -L$${MKLLIB} -lmkl_gf_ilp64 \
 ifeq ("$(COMPILERNAME)", "intel")
   EXTRA_CONFIGURE_OPTION = --enable-fortran-calling-convention=f2c
   MKLLINK = -mkl
-else ifeq ("$(COMPILERNAME)", "gnu")
+endif
+
+# The Intel compilers use the C++ libraries that are packaged with the first
+# gnu compiler found in PATH. Since the default system gnu doesn't support
+# C++11, for Intel we have to load /opt/gnu to get the updated library.
+MODULE_LOAD_CXX11_LIB =
+ifeq ("$(COMPILERNAME)", "intel")
+  MODULE_LOAD_CXX11_LIB = $(call MODULE_LOAD_COMPILER, gnu, gcc)
 endif
 
 ifneq ("$(ROLLOPTS)", "$(subst avx,,$(ROLLOPTS))")
@@ -113,6 +120,7 @@ LICENSE: $(SRC_DIRS)
 
 build: $(SRC_DIRS)
 	( \
+	  $(MODULE_LOAD_CXX11_LIB); \
 	  $(MODULE_LOAD_CC); \
           $(MODULE_LOAD_MPI); \
 	  $(MODULE_LOAD_FFTW); \
@@ -161,6 +169,7 @@ install::
 	mkdir -p -m 755 $(ROOT)/$(PKGROOT)
 	$(PKGROOT_BIND_MOUNT)
 	( \
+	  $(MODULE_LOAD_CXX11_LIB); \
 	  $(MODULE_LOAD_CC); \
 	  $(MODULE_LOAD_MPI); \
 	  export CC=mpicc; \
