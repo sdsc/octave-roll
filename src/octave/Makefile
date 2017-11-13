@@ -145,7 +145,7 @@ build: $(SRC_DIRS)
 	    export CFLAGS="$${CFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export FFLAGS="$${FFLAGS} -I$${MKLHOME}/include -m64"; \
-	    export MKLLIB=$${MKLROOT}/lib/intel64; \
+	    export MKLLIB=$${MKLHOME}/lib/intel64; \
 	    ../configure --prefix=$(PKGROOT) \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
