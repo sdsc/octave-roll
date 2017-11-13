@@ -107,7 +107,7 @@ DESCRIPTION:
 	  $(DESCRIBE_HDF5) \
 	) > $@
 	$(MODULE_LOAD_MKL); \
-	if test -n "$${MKL_ROOT}"; then \
+	if test -n "$${MKLHOME}"; then \
 	  $(DESCRIBE_MKL) >> $@; \
 	fi
 
@@ -136,16 +136,16 @@ build: $(SRC_DIRS)
 	  cd build; \
           export CPPFLAGS="-I$${MPIHOME}/include -I/share/apps/compute/pcre/include"; \
           export LDFLAGS="-L/share/apps/compute/pcre/lib"; \
-	  if test -n "$${MKL_ROOT}"; then \
+	  if test -n "$${MKLHOME}"; then \
 	    if test "$(COMPILERNAME)" = "intel"; then \
 	      export F77_INTEGER_8_FLAG=-i8; \
 	    elif test "$(COMPILERNAME)" = "gnu"; then \
 	      export F77_INTEGER_8_FLAG=-fdefault-integer-8; \
 	    fi; \
-	    export CFLAGS="$${CFLAGS} -I$${MKL_ROOT}/include -m64"; \
-	    export CXXFLAGS="$${CXXFLAGS} -I$${MKL_ROOT}/include -m64"; \
-	    export FFLAGS="$${FFLAGS} -I$${MKL_ROOT}/include -m64"; \
-	    export MKLLIB=`find $${MKL_ROOT}/lib/* -maxdepth 0 | head -1`; \
+	    export CFLAGS="$${CFLAGS} -I$${MKLHOME}/include -m64"; \
+	    export CXXFLAGS="$${CXXFLAGS} -I$${MKLHOME}/include -m64"; \
+	    export FFLAGS="$${FFLAGS} -I$${MKLHOME}/include -m64"; \
+	    export MKLLIB=$${MKLROOT}/lib/intel64; \
 	    ../configure --prefix=$(PKGROOT) \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
