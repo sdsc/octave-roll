@@ -12,17 +12,17 @@ All rights reserved. Rocks(r) v7.0 www.rocksclusters.org
 </copyright>
 
 <edge from="compute">
-  <to>octave-common</to>
+  <to>octave-install</to>
 </edge>
 <order head="compute">
-  <tail>octave-common</tail>
+  <tail>octave-install</tail>
 </order>
 
 <edge from="login">
-  <to>octave-common</to>
+  <to>octave-install</to>
 </edge>
 <order head="login">
-  <tail>octave-common</tail>
+  <tail>octave-install</tail>
 </order>
 
 </graph>
