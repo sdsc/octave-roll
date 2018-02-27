@@ -10,7 +10,7 @@ MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
 
 NAME           = sdsc-octave
 VERSION        = 4.2.1
-RELEASE        = 3
+RELEASE        = 4
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave
@@ -48,4 +48,5 @@ CONTROL_DIR     = $(CONTROL_PKG:%.$(CONTROL_SUFFIX)=%)
 
 TAR_GZ_PKGS    = $(SOURCE_PKG) $(STRUCT_PKG) $(PARALLEL_PKG) $(CONTROL_PKG) $(SIGNAL_PKG)
 
-RPM.EXTRAS     = AutoReq:No
+RPM.EXTRAS     = AutoReq:No\nAutoProv:No
+RPM.PREFIX     = $(PKGROOT)
