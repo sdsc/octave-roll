@@ -11,11 +11,18 @@ Copyright (c) 2000 - 2017 The Regents of the University of California.
 All rights reserved. Rocks(r) v7.0 www.rocksclusters.org
 </copyright>
 
-<edge from="client">
-  <to>octave-install</to>
+<edge from="compute">
+  <to>octave-common</to>
 </edge>
-<order head="common">
-  <tail>octave-install</tail>
+<order head="compute">
+  <tail>octave-common</tail>
+</order>
+
+<edge from="login">
+  <to>octave-common</to>
+</edge>
+<order head="login">
+  <tail>octave-common</tail>
 </order>
 
 </graph>
