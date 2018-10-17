@@ -1,6 +1,6 @@
 This file documents the installation of Octave.
 
-   Octave is free software; you can redistribute it and/or modify it
+   Octave is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by the
 Free Software Foundation.
 
@@ -75,13 +75,13 @@ C++, C, and Fortran compilers
      The Octave sources are primarily written in C++, but some portions
      are also written in C and Fortran.  The Octave sources are intended
      to be portable.  Recent versions of the GNU compiler collection
-     (GCC) should work (<http://gcc.gnu.org>).  If you use GCC, you
+     (GCC) should work (<https://gcc.gnu.org>).  If you use GCC, you
      should avoid mixing versions.  For example, be sure that you are
      not using the obsolete 'g77' Fortran compiler with modern versions
      of 'gcc' and 'g++'.
 
 GNU Make
-     Tool for building software (<http://www.gnu.org/software/make>).
+     Tool for building software (<https://www.gnu.org/software/make>).
      Octave's build system requires GNU Make.  Other versions of Make
      will not work.  Fortunately, GNU Make is highly portable and easy
      to install.
@@ -94,41 +94,41 @@ AWK, sed, and other Unix utilities
    Additionally, the following tools may be needed:
 
 Bison
-     Parser generator (<http://www.gnu.org/software/bison>).  You will
+     Parser generator (<https://www.gnu.org/software/bison>).  You will
      need Bison if you modify the 'oct-parse.yy' source file or if you
      delete the files that are generated from it.
 
 Flex
-     Lexer analyzer (<http://www.gnu.org/software/flex>).  You will need
-     Flex if you modify the 'lex.ll' source file or if you delete the
-     files that are generated from it.
+     Lexer analyzer (<https://www.gnu.org/software/flex>).  You will
+     need Flex if you modify the 'lex.ll' source file or if you delete
+     the files that are generated from it.
 
 Autoconf
      Package for software configuration
-     (<http://www.gnu.org/software/autoconf>).  Autoconf is required if
+     (<https://www.gnu.org/software/autoconf>).  Autoconf is required if
      you modify Octave's 'configure.ac' file or other files that it
      requires.
 
 Automake
      Package for Makefile generation
-     (<http://www.gnu.org/software/automake>).  Automake is required if
+     (<https://www.gnu.org/software/automake>).  Automake is required if
      you modify Octave's 'Makefile.am' files or other files that they
      depend on.
 
 Libtool
      Package for building software libraries
-     (<http://www.gnu.org/software/libtool>).  Libtool is required by
+     (<https://www.gnu.org/software/libtool>).  Libtool is required by
      Automake.
 
 gperf
      Perfect hash function generator
-     (<http://www.gnu.org/software/gperf>).  You will need gperf if you
+     (<https://www.gnu.org/software/gperf>).  You will need gperf if you
      modify the 'octave.gperf' file or if you delete the file that is
      generated from it.
 
 Texinfo
      Package for generating online and print documentation
-     (<http://www.gnu.org/software/texinfo>).  You will need Texinfo to
+     (<https://www.gnu.org/software/texinfo>).  You will need Texinfo to
      build Octave's documentation or if you modify the documentation
      source files or the docstring of any Octave function.
 
@@ -139,7 +139,7 @@ The following external packages are required:
 
 BLAS
      Basic Linear Algebra Subroutine library.  Accelerated BLAS
-     libraries such as OpenBLAS (<http://www.openblas.net/>) or ATLAS
+     libraries such as OpenBLAS (<https://www.openblas.net/>) or ATLAS
      (<http://math-atlas.sourceforge.net>) are recommended for best
      performance.  The reference implementation
      (<http://www.netlib.org/blas>) is slow, unmaintained, and suffers
@@ -150,12 +150,12 @@ LAPACK
 
 PCRE
      The Perl Compatible Regular Expression library
-     (<http://www.pcre.org>).
+     (<https://www.pcre.org>).
 
    The following external package is optional but strongly recommended:
 
 GNU Readline
-     Command-line editing library (<www.gnu.org/s/readline>).
+     Command-line editing library (<https://www.gnu.org/s/readline>).
 
    If you wish to build Octave without GNU readline installed, you must
 use the '--disable-readline' option when running the configure script.
@@ -165,13 +165,13 @@ recommended:
 
 ARPACK
      Library for the solution of large-scale eigenvalue problems
-     (<http://forge.scilab.org/index.php/p/arpack-ng>).  ARPACK is
+     (<https://forge.scilab.org/index.php/p/arpack-ng>).  ARPACK is
      required to provide the functions 'eigs' and 'svds'.
 
 cURL
      Library for transferring data with URL syntax
-     (<http://curl.haxx.se>).  cURL is required to provide the 'urlread'
-     and 'urlwrite' functions and the 'ftp' class.
+     (<https://curl.haxx.se>).  cURL is required to provide the
+     'urlread' and 'urlwrite' functions and the 'ftp' class.
 
 FFTW3
      Library for computing discrete Fourier transforms
@@ -186,22 +186,22 @@ FLTK
 
 fontconfig
      Library for configuring and customizing font access
-     (<http://www.freedesktop.org/wiki/Software/fontconfig>).
+     (<https://www.freedesktop.org/wiki/Software/fontconfig>).
      Fontconfig is used to manage fonts for Octave's OpenGL-based
      graphics functions.
 
 FreeType
-     Portable font engine (<http://www.freetype.org>).  FreeType is used
-     to perform font rendering for Octave's OpenGL-based graphics
+     Portable font engine (<https://www.freetype.org>).  FreeType is
+     used to perform font rendering for Octave's OpenGL-based graphics
      functions.
 
 GLPK
-     GNU Linear Programming Kit (<http://www.gnu.org/software/glpk>).
+     GNU Linear Programming Kit (<https://www.gnu.org/software/glpk>).
      GPLK is required for the function 'glpk'.
 
 gl2ps
      OpenGL to PostScript printing library
-     (<http://www.geuz.org/gl2ps/>).  gl2ps is required for printing
+     (<https://www.geuz.org/gl2ps/>).  gl2ps is required for printing
      when using OpenGL-based graphics toolkits (currently either FLTK or
      Qt).
 
@@ -216,7 +216,7 @@ GraphicsMagick++
 
 HDF5
      Library for manipulating portable data files
-     (<http://www.hdfgroup.org/HDF5>).  HDF5 is required for Octave's
+     (<https://www.hdfgroup.org/HDF5>).  HDF5 is required for Octave's
      'load' and 'save' commands to read and write HDF data files.
 
 Java Development Kit
@@ -227,17 +227,24 @@ Java Development Kit
      within Octave.
 
 LLVM
-     Compiler framework, (<http://www.llvm.org>).  LLVM is required for
+     Compiler framework, (<https://www.llvm.org>).  LLVM is required for
      Octave's experimental just-in-time (JIT) compilation for speeding
      up the interpreter.
 
 OpenGL
-     API for portable 2-D and 3-D graphics (<http://www.opengl.org>).
+     API for portable 2-D and 3-D graphics (<https://www.opengl.org>).
      An OpenGL implementation is required to provide Octave's
      OpenGL-based graphics functions.  Octave's OpenGL-based graphics
      functions usually outperform the gnuplot-based graphics functions
      because plot data can be rendered directly instead of sending data
      and commands to gnuplot for interpretation and rendering.
+
+PortAudio
+     PortAudio (<http://www.portaudio.com/>) provides a very simple API
+     for recording and/or playing sound using a simple callback function
+     or a blocking read/write interface.  It is required for the audio
+     processing functions 'audioplayer', 'audiorecorder', and
+     'audiodevinfo'.
 
 Qhull
      Computational geometry library (<http://www.qhull.org>).  Qhull is
@@ -246,7 +253,7 @@ Qhull
 
 QRUPDATE
      QR factorization updating library
-     (<http://sourceforge.net/projects/qrupdate>).  QRUPDATE is used to
+     (<https://sourceforge.net/projects/qrupdate>).  QRUPDATE is used to
      provide improved performance for the functions 'qrdelete',
      'qrinsert', 'qrshift', and 'qrupdate'.
 
@@ -257,18 +264,24 @@ QScintilla
      the GUI.
 
 Qt
-     GUI and utility libraries ().  Qt is required for building the GUI.
-     It is a large framework, but the only components required are the
-     GUI, core, and network modules.
+     GUI and utility libraries (<https://www.qt.io>).  Qt is required
+     for building the GUI. It is a large framework, but the only
+     components required are the GUI, core, and network modules.
 
 SuiteSparse
      Sparse matrix factorization library
-     (<http://www.cise.ufl.edu/research/sparse/SuiteSparse>).
+     (<http://faculty.cse.tamu.edu/davis/suitesparse.html>).
      SuiteSparse is required to provide sparse matrix factorizations and
      solution of linear equations for sparse systems.
 
+SUNDIALS
+     The SUite of Nonlinear and DIfferential/ALgebraic Equation Solvers
+     (<https://computation.llnl.gov/projects/sundials>) is required for
+     the Ordinary Differential Equations (ODE) solvers 'ode15i' and
+     'ode15s'.
+
 zlib
-     Data compression library (<http://zlib.net>).  The zlib library is
+     Data compression library (<https://zlib.net>).  The zlib library is
      required for Octave's 'load' and 'save' commands to handle
      compressed data, including MATLAB v5 MAT files.
 
@@ -293,19 +306,42 @@ zlib
      '--srcdir=DIR'
           Look for Octave sources in the directory DIR.
 
-     '--enable-64'
-          This is an *experimental* option to enable Octave to use
-          64-bit integers for array dimensions and indexing on 64-bit
-          platforms.  You probably don't want to use this option unless
-          you know what you are doing.  *Note Compiling Octave with
-          64-bit Indexing::, for more details about building Octave with
-          this option.
+     '--disable-64'
+          Disable using 64-bit integers for indexing arrays and use
+          32-bit integers instead.  On systems with 32-bit pointers,
+          this option is always disabled.  If the configure script
+          determines that your BLAS library uses 32-bit integers, then
+          operations using the following libraries are limited to arrays
+          with dimensions that are smaller than 2^{31} elements:
 
-     '--enable-bounds-check'
-          Enable bounds checking for indexing operators in the internal
-          array classes.  This option is primarily used for debugging
-          Octave.  Building Octave with this option has a negative
-          impact on performance and is not recommended for general use.
+             * BLAS
+
+             * LAPACK
+
+             * QRUPDATE
+
+             * SuiteSparse
+
+             * ARPACK
+
+          Additionally, the following libraries use 'int' internally, so
+          maximum problem sizes are always limited:
+
+             * GLPK
+
+             * Qhull
+
+          *Note Compiling Octave with 64-bit Indexing::, for more
+          details about building Octave with more complete support for
+          large arrays.
+
+     '--enable-address-sanitizer-flags'
+          Enable compiler options '-fsanitize=address' and
+          '-fomit-frame-pointer' for memory access checking.  This
+          option is primarily used for debugging Octave.  Building
+          Octave with this option has a negative impact on performance
+          and is not recommended for general use.  It may also interfere
+          with proper functioning of the GUI.
 
      '--disable-docs'
           Disable building all forms of the documentation (Info, PDF,
@@ -533,44 +569,37 @@ Note: the following only applies to systems that have 64-bit pointers.
 Configuring Octave with '--enable-64' cannot magically make a 32-bit
 system have a 64-bit address space.
 
-   On 64-bit systems, Octave is limited to (approximately) the following
-array sizes when using the default 32-bit indexing mode:
+   On 64-bit systems, Octave uses 64-bit integers for indexing arrays by
+default.  If the configure script determines that your BLAS library uses
+32-bit integers, then operations using the following libraries are
+limited to arrays with dimensions that are smaller than 2^{31} elements:
 
-     double:         16 GB
-     single:          8 GB
-     uint64, int64:  16 GB
-     uint32, int32:   8 GB
-     uint16, int16:   4 GB
-     uint8, int8:     2 GB
+   * BLAS
 
-   In each case, the limit is really (approximately) 2^{31} elements
-because of the default type of the value used for indexing arrays
-(signed 32-bit integer, corresponding to the size of a Fortran INTEGER
-value).
+   * LAPACK
 
-   Trying to create larger arrays will produce the following error:
+   * QRUPDATE
 
-     octave:1> a = zeros (1024*1024*1024*3, 1, 'int8');
-     error: memory exhausted or requested size too large
-            for range of Octave's index type --
-            trying to return to prompt
+   * SuiteSparse
 
-You will obtain this error even if your system has enough memory to
-create this array (4 GB in the above case).
+   * ARPACK
 
-   To use arrays larger than 2 GB, Octave has to be configured with the
-option '--enable-64'.  This option is experimental and you are
-encouraged to submit bug reports if you find a problem.  With this
-option, Octave will use 64-bit integers internally for array dimensions
-and indexing.  However, all numerical libraries used by Octave will
-*also* need to use 64-bit integers for array dimensions and indexing.
-In most cases, this means they will need to be compiled from source
-since most (all?)  distributions which package these libraries compile
-them with the default Fortran integer size, which is normally 32-bits
-wide.
+   Additionally, the following libraries use 'int' internally, so
+maximum problem sizes are always limited:
+
+   * GLPK
+
+   * Qhull
+
+   Except for GLPK and Qhull, these libraries may also be configured to
+use 64-bit integers, but most systems do not provide packages built this
+way.  If you wish to experiment with large arrays, the following
+information may be helpful.
 
    The following instructions were tested with the development version
-of Octave and GCC 4.3.4 on an x86_64 Debian system.
+of Octave and GCC 4.3.4 on an x86_64 Debian system and may be out of
+date now.  Please report any problems or corrections on the Octave bug
+tracker.
 
    The versions listed below are the versions used for testing.  If
 newer versions of these packages are available, you should try to use
@@ -593,7 +622,7 @@ them, although there may be some differences.
           assume that you installed the LAPACK library as
           $prefix64/lib/liblapack.a.
 
-   * QRUPDATE (<http://sourceforge.net/projects/qrupdate>)
+   * QRUPDATE (<https://sourceforge.net/projects/qrupdate>)
 
      In the 'Makeconf' file:
 
@@ -609,7 +638,7 @@ them, although there may be some differences.
 
         - Run 'make install' to install the library.
 
-   * SuiteSparse (<http://www.cise.ufl.edu/research/sparse/SuiteSparse>)
+   * SuiteSparse (<http://faculty.cse.tamu.edu/davis/suitesparse.html>)
 
      Pass the following options to 'make' to enable 64-bit integers for
      BLAS library calls.  On 64-bit Windows systems, use
@@ -633,7 +662,7 @@ them, although there may be some differences.
 
      Other systems may require a different solution.
 
-   * ARPACK (http://forge.scilab.org/index.php/p/arpack-ng/)
+   * ARPACK (<https://forge.scilab.org/index.php/p/arpack-ng/>)
 
         - Add '-fdefault-integer-8' to 'FFLAGS' when running configure.
 
@@ -663,13 +692,13 @@ them, although there may be some differences.
             --enable-64
 
      You must ensure that all Fortran sources except those in the
-     'liboctave/cruft/ranlib' directory are compiled such that INTEGERS
-     are 8-bytes wide.  If you are using gfortran, the configure script
-     should automatically set the Makefile variable 'F77_INTEGER_8_FLAG'
-     to '-fdefault-integer-8'.  If you are using another compiler, you
-     must set this variable yourself.  You should NOT set this flag in
-     'FFLAGS', otherwise the files in 'liboctave/cruft/ranlib' will be
-     miscompiled.
+     'liboctave/external/ranlib' directory are compiled such that
+     INTEGERS are 8-bytes wide.  If you are using gfortran, the
+     configure script should automatically set the Makefile variable
+     'F77_INTEGER_8_FLAG' to '-fdefault-integer-8'.  If you are using
+     another compiler, you must set this variable yourself.  You should
+     NOT set this flag in 'FFLAGS', otherwise the files in
+     'liboctave/external/ranlib' will be miscompiled.
 
    * Other dependencies
 
@@ -799,7 +828,7 @@ installation of Octave.
           pcc_binval: missing IR_CONV in complex op
           make[2]: *** [zgemm.o] Error 1
 
-     when compiling the Fortran subroutines in the 'liboctave/cruft'
+     when compiling the Fortran subroutines in the 'liboctave/external'
      subdirectory, you should either upgrade your compiler or try
      compiling with optimization turned off.
 
