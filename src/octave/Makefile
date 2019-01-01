@@ -179,7 +179,7 @@ install::
           export F77=mpif90; \
           export FFLAGS="$(COMPILER_FLAGS)"; \
           cd $(SOURCE_DIR)/build; \
-          $(MAKE) install; \
+          $(MAKE) -j 16 install; \
           export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
           export CXXFLAGS=-std=c++11; \
           cd ../..; \
