@@ -63,6 +63,8 @@ software, e.g.,
 make ROLLCOMPILER=gnu ROLLMPI=mvapich2_ib 2>&1 | tee build.log
 ```
 
+For octave 4.4.1, the gnu compiler should be used. There are linking problems with the intel compiler.
+
 The build process recognizes "gnu", "intel" or "pgi" as the value for the
 `ROLLCOMPILER` variable; any MPI modulefile name may be used as the value of
 the `ROLLMPI` variable.  The defaults values are "gnu" and "rocks-openmpi".
