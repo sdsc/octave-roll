@@ -145,14 +145,14 @@ build: $(SRC_DIRS)
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export FFLAGS="$${FFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export MKLLIB=$${MKLHOME}/lib/intel64; \
-	    ../configure --prefix=$(PKGROOT) \
+	    ../configure --prefix=$(PKGROOT)  --with-qt=5 \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
 	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64 \
               $(EXTRA_CONFIGURE_OPTION); \
 	  else \
-	    ../configure --prefix=$(PKGROOT) \
+	    ../configure --prefix=$(PKGROOT)  --with-qt=5 \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
@@ -196,4 +196,4 @@ install::
 	@echo "::: Package $(NAME) install complete :::"
 
 clean::
-	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
+	rm -rf $(SOURCE_DIR) $(PARALLEL_DIR) DESCRIPTION LICENSE
