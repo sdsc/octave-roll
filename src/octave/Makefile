@@ -145,14 +145,14 @@ build: $(SRC_DIRS)
 	    export CXXFLAGS="$${CXXFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export FFLAGS="$${FFLAGS} -I$${MKLHOME}/include -m64"; \
 	    export MKLLIB=$${MKLHOME}/lib/intel64; \
-	    ../configure --prefix=$(PKGROOT) \
+	    ../configure --prefix=$(PKGROOT)  --with-qt=5 \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
 	      --with-blas="$(MKLLINK)" --with-lapack="$(MKLLINK)" --enable-64 \
               $(EXTRA_CONFIGURE_OPTION); \
 	  else \
-	    ../configure --prefix=$(PKGROOT) \
+	    ../configure --prefix=$(PKGROOT)  --with-qt=5 \
 	      --with-fftw3-includedir=$${FFTWHOME}/include --with-fftw3-libdir=$${FFTWHOME}/lib \
 	      --with-fftw3f-includedir=$${FFTWHOME}/include --with-fftw3f-libdir=$${FFTWHOME}/lib \
 	      --with-hdf5-includedir=$${HDF5HOME}/include --with-hdf5-libdir=$${HDF5HOME}/lib \
@@ -171,7 +171,10 @@ install::
 	    $(MODULE_LOAD_CXX11_LIB); \
 	  fi; \
 	  $(MODULE_LOAD_CC); \
-	  $(MODULE_LOAD_MPI); \
+          $(MODULE_LOAD_MPI); \
+	  $(MODULE_LOAD_FFTW); \
+	  $(MODULE_LOAD_HDF5); \
+	  $(MODULE_LOAD_MKL); \
 	  export CC=mpicc; \
 	  export CFLAGS="$(COMPILER_FLAGS)"; \
           export CXX=mpicxx; \
@@ -179,18 +182,18 @@ install::
           export F77=mpif90; \
           export FFLAGS="$(COMPILER_FLAGS)"; \
           cd $(SOURCE_DIR)/build; \
-          $(MAKE) -j 16 install; \
-          export LD_LIBRARY_PATH=$(ROOT)/$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
+          $(MAKE) -j `nproc --ignore=2` install; \
+          export LD_LIBRARY_PATH=$(PKGROOT)/lib/octave/$(VERSION):$${LD_LIBRARY_PATH}; \
           export CXXFLAGS=-std=c++11; \
           cd ../..; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(STRUCT_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(PARALLEL_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
-          $(ROOT)/$(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
+          $(PKGROOT)/bin/octave --eval "pkg install -global $(STRUCT_PKG)"; \
+          $(PKGROOT)/bin/octave --eval "pkg install -global $(PARALLEL_PKG)"; \
+          $(PKGROOT)/bin/octave --eval "pkg install -global $(CONTROL_PKG)"; \
+          $(PKGROOT)/bin/octave --eval "pkg install -global $(SIGNAL_PKG)" \
         )
 	$(PKGROOT_BIND_UMOUNT)
 	$(INSTALL_LICENSE_FILES)
 	@echo "::: Package $(NAME) install complete :::"
 
 clean::
-	rm -rf $(SOURCE_DIR) DESCRIPTION LICENSE
+	rm -rf $(SOURCE_DIR) $(PARALLEL_DIR) DESCRIPTION LICENSE
