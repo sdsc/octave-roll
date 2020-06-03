@@ -10,7 +10,7 @@ MPINAME := $(firstword $(subst /, ,$(ROLLMPI)))
 
 NAME           = sdsc-octave
 VERSION        = 5.2.0
-RELEASE        = 0
+RELEASE        = 1
 PKGROOT        = /opt/octave
 
 SRC_SUBDIR     = octave
@@ -48,5 +48,6 @@ CONTROL_DIR     = $(CONTROL_PKG:%.$(CONTROL_SUFFIX)=%)
 
 TAR_GZ_PKGS    = $(SOURCE_PKG) $(STRUCT_PKG) $(PARALLEL_PKG) $(CONTROL_PKG) $(SIGNAL_PKG)
 
-RPM.EXTRAS     = AutoReq:No\nAutoProv:No
+RPM.EXTRAS     = AutoReq:No\nAutoProv:No\nPreReq:qt5-qtbase-devel,qt5-qttools-libs-help,qt5-doctools,qt5-qttools-devel
+
 RPM.PREFIX     = $(PKGROOT)
